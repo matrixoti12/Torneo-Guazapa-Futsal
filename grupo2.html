@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario de Partidos</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .card-container {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                overflow: visible;
+            }
+
+            .card {
+                min-width: 100%;
+                max-width: 100%;
+                transform: scale(1);
+                position: relative;
+                margin: 0;
+                box-shadow: none;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .team-name {
+                font-size: 20px;
+            }
+
+            .nav-button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .match-item {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00d2ff;
+            text-transform: uppercase;
+        }
+
+        .card-container {
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;
+            max-width: 100%;
+            position: relative;
+            min-height: 300px;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            min-width: 300px;
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            transform: scale(0.5);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            position: absolute;
+        }
+
+        .card.active {
+            transform: scale(1);
+            opacity: 1;
+            position: relative;
+        }
+
+        .team-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .match-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .match-item {
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: default;
+            user-select: none;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Estilos para los estados de los partidos */
+        .match-item.jugado {
+            background-color: #154be2; /* Verde para jugado */
+        }
+
+        .match-item.pendiente {
+            background-color: #ff0707; /* Amarillo para pendiente */
+        }
+
+        .match-item.reprogramado {
+            background-color: #1ffdf6; /* Rojo para reprogramado */
+        }
+
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background-color: #00d2ff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calendario de Partidos</h1>
+        <div class="card-container">
+            <div class="card active" data-team="Newcastle">
+                <div class="team-name">Newcastle</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yogui</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item pendiente">River</li>
+                    <li class="match-item pendiente">Baratillo</li>
+                    <li class="match-item pendiente">Halcones</li>
+                    <li class="match-item pendiente">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópic</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Arsenal">
+                <div class="team-name">Arsenal</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yogui.a</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item pendiente">Champagne</li>
+                    <li class="match-item reprogramado">Rodeo 2</li>
+                    <li class="match-item reprogramado">River</li>
+                    <li class="match-item reprogramado">Baratillo</li>
+                    <li class="match-item pendiente">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Valencia">
+                <div class="team-name">Valencia</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item pendiente">River</li>
+                    <li class="match-item pendiente">Baratillo</li>
+                    <li class="match-item pendiente">Halcones</li>
+                    <li class="match-item pendiente">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Yoggi">
+                <div class="team-name">Yogui.A</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Torrejas">
+                <div class="team-name">Torrejas</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Lyon">
+                <div class="team-name">Lyon</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Clase A">
+                <div class="team-name">Clase A</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Champagne">
+                <div class="team-name">Champagne</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Rodeo 2">
+                <div class="team-name">Rodeo 2</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="River">
+                <div class="team-name">River</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Baratillo">
+                <div class="team-name">Baratillo</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Halcones">
+                <div class="team-name">Halcones</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Bayer Leverkusen">
+                <div class="team-name">Bayer Leverkusen</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Trópico</li>
+                </ul>
+            </div>
+            <div class="card" data-team="Trópico">
+                <div class="team-name">Trópico</div>
+                <ul class="match-list">
+                    <li class="match-item jugado">Newcastle</li>
+                    <li class="match-item jugado">Arsenal</li>
+                    <li class="match-item jugado">Valencia</li>
+                    <li class="match-item jugado">Yoggi</li>
+                    <li class="match-item jugado">Torrejas</li>
+                    <li class="match-item jugado">Lyon</li>
+                    <li class="match-item jugado">Clase A</li>
+                    <li class="match-item jugado">Champagne</li>
+                    <li class="match-item jugado">Rodeo 2</li>
+                    <li class="match-item jugado">River</li>
+                    <li class="match-item jugado">Baratillo</li>
+                    <li class="match-item jugado">Halcones</li>
+                    <li class="match-item jugado">Bayer Leverkusen</li>
+                </ul>
+            </div>
+        </div>
+        <div class="navigation">
+            <button class="nav-button" id="prevButton">Anterior</button>
+            <button class="nav-button" id="nextButton">Siguiente</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentCardIndex = 0;
+            const cards = document.querySelectorAll('.card');
+            const prevBtn = document.getElementById('prevButton');
+            const nextBtn = document.getElementById('nextButton');
+
+            function updateCardVisibility() {
+                cards.forEach((card, index) => {
+                    card.classList.toggle('active', index === currentCardIndex);
+                });
+
+                prevBtn.disabled = currentCardIndex === 0;
+                nextBtn.disabled = currentCardIndex === cards.length - 1;
+            }
+
+            nextBtn.addEventListener('click', function () {
+                if (currentCardIndex < cards.length - 1) {
+                    currentCardIndex++;
+                    updateCardVisibility();
+                }
+            });
+
+            prevBtn.addEventListener('click', function () {
+                if (currentCardIndex > 0) {
+                    currentCardIndex--;
+                    updateCardVisibility();
+                }
+            });
+
+            updateCardVisibility(); // Initialize button states
+        });
+    </script>
+</body>
+
+</html>

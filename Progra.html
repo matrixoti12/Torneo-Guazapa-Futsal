@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación de Partidos</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Programación de Partidos</h1>
+        <!-- Formulario para editar partidos -->
+        <form id="editMatchForm" class="edit-form">
+            <label for="matchIndex">Selecciona el partido:</label>
+            <select id="matchIndex" required>
+                <option value="">-- Selecciona un partido --</option>
+                <option value="0">Lunes 6:00 PM</option>
+                <option value="1">Lunes 6:45 PM</option>
+                <option value="2">Lunes 7:30 PM</option>
+                <option value="3">Lunes 8:15 PM</option>
+                <option value="4">Lunes 9:00 PM</option>
+                <option value="5">Martes 6:00 PM</option>
+                <option value="6">Martes 6:45 PM</option>
+                <option value="7">Martes 7:30 PM</option>
+                <option value="8">Martes 8:15 PM</option>
+                <option value="9">Martes 9:00 PM</option>
+                <option value="10">Miércoles 6:00 PM</option>
+                <option value="11">Miércoles 6:45 PM</option>
+                <option value="12">Miércoles 7:30 PM</option>
+                <option value="13">Miércoles 8:15 PM</option>
+                <option value="14">Miércoles 9:00 PM</option>
+                <option value="15">Jueves 6:00 PM</option>
+                <option value="16">Jueves 6:45 PM</option>
+                <option value="17">Jueves 7:30 PM</option>
+                <option value="18">Jueves 8:15 PM</option>
+                <option value="19">Jueves 9:00 PM</option>
+                <option value="20">Viernes 6:00 PM</option>
+                <option value="21">Viernes 6:45 PM</option>
+                <option value="22">Viernes 7:30 PM</option>
+                <option value="23">Viernes 8:15 PM</option>
+                <option value="24">Viernes 9:00 PM</option>
+                <option value="25">Sábado 6:00 PM</option>
+                <option value="26">Sábado 6:45 PM</option>
+                <option value="27">Sábado 7:30 PM</option>
+                <option value="28">Sábado 8:15 PM</option>
+                <option value="29">Sábado 9:00 PM</option>
+            </select>
+            <label for="teams">Equipos:</label>
+            <input type="text" id="teams" placeholder="Ej: Equipo A vs Equipo B" required>
+            <label for="referee">Árbitro:</label>
+            <input type="text" id="referee" required>
+            <button type="submit">Actualizar Partido</button>
+        </form>
+
+        <button id="downloadBtn" class="edit-form">Descargar Programación como Imagen</button>
+
+        <div class="day">LUNES 11/11/24</div>
+        <div class="matches" id="mondayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">Valencia vs S. Antonio#2</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Newcastle vs River</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">RD1 vs Redbull</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15 PM</div>
+                <div class="teams">Rodeo#2 vs Valencia</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00 PM</div>
+                <div class="teams">Juventus vs Quezoneta</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+        </div>
+
+            <div class="day">MARTES 12/11/24</div>
+        <div class="matches" id="tuesdayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">Colón vs Milán</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Atlético vs Olimpic</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">Arsenal vs Torrejas FC</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15 PM</div>
+                <div class="teams">Borussia vs Real Madrid</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00 PM</div>
+                <div class="teams">Baratillo vs Yogui.A</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+        </div>
+
+        <div class="day">MIÉRCOLES 13/11/24</div>
+        <div class="matches" id="wednesdayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">Olimpic vs Fénix</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Halcones FC vs Rodeo#2</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">Quezoneta vs RD1</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15 PM</div>
+                <div class="teams">Tropic FC vs Newcastle</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00 PM</div>
+                <div class="teams">Redbull vs Roma</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+        </div>
+
+        <div class="day">JUEVES 14/11/24</div>
+        <div class="matches" id="thursdayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">The Queen vs S. Antonio#2</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Sevilla vs Talleres</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">Baratillo vs Newcastle</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15 PM</div>
+                <div class="teams">Cruz Azul vs Galaxi</div>
+                <div class="referee">Árbitro: ARB ELIOT</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00 PM</div>
+                <div class="teams">Champagne vs B. Leverkusen</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+        </div>
+
+        <div class="day">VIERNES 15/11/24</div>
+        <div class="matches" id="fridayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">Sevilla vs PSG</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Yogui.A vs Arsenal</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">RD1 vs Borussia</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15 PM</div>
+                <div class="teams">Halcones FC vs Clase A</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00 PM</div>
+                <div class="teams">Quezoneta vs Roma</div>
+                <div class="referee">Árbitro: ARB ULICES</div>
+            </div>
+        </div>
+
+        <div class="day">SÁBADO 16/11/24</div>
+        <div class="matches" id="saturdayMatches">
+            <div class="match">
+                <div class="time">6:00 PM</div>
+                <div class="teams">Champagne vs Torrejas FC</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">6:45 PM</div>
+                <div class="teams">Champagne vs Torrejas FC</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">7:30 PM</div>
+                <div class="teams">B. Leverkusen vs Newcastle</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">8:15PM</div>
+                <div class="teams">Champagne vs Torrejas FC</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            <div class="match">
+                <div class="time">9:00PM</div>
+                <div class="teams">B. Leverkusen vs Newcastle</div>
+                <div class="referee">Árbitro: ARB EDWIN</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('editMatchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const matchIndex = document.getElementById('matchIndex').value;
+            const teams = document.getElementById('teams').value;
+            const referee = document.getElementById('referee').value;
+
+            // Obtener el partido correspondiente
+            const matchDiv = document.querySelectorAll('.match')[matchIndex];
+
+            if (matchDiv) {
+                matchDiv.querySelector('.teams').textContent = teams;
+                matchDiv.querySelector('.referee').textContent = 'Árbitro: ' + referee;
+            }
+
+            // Limpiar el formulario
+            this.reset();
+        });
+
+        // Función para descargar la programación como imagen
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const scheduleDivs = document.querySelectorAll('.day, .matches');
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.top = '-9999px';
+            container.style.backgroundColor = window.getComputedStyle(document.body).backgroundColor; // Obtener el color de fondo del body
+
+            // Clonar el título y añadirlo al contenedor
+            const title = document.querySelector('h1').cloneNode(true);
+            container.appendChild(title);
+
+            // Añadir los divs de la programación al contenedor
+            scheduleDivs.forEach(div => container.appendChild(div.cloneNode(true)));
+
+            document.body.appendChild(container);
+
+            html2canvas(container).then(function(canvas) {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'programacion_partidos.png';
+                document.body.appendChild(link); // Añadir el enlace al DOM
+                link.click(); // Simular clic en el enlace
+                document.body.removeChild(link); // Eliminar el enlace del DOM
+                document.body.removeChild(container); // Eliminar el contenedor temporal del DOM
+            });
+        });
+    </script>
+</body>
+</html>

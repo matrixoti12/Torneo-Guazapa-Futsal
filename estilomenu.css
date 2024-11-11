@@ -1,0 +1,136 @@
+/* Reset de márgenes y paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ff04ea8d;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1F1F1F;
+    padding: 15px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    width: 40px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.menu-toggle {
+    font-size: 24px;
+    color: #FFF;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    transition: transform 0.3s ease;
+}
+
+.nav-links li:hover {
+    transform: scale(1.1);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 400;
+}
+
+.nav-links a:hover {
+    color: #FF7F50;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #1F1F1F;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #1F1F1F;
+    border-top: 1px solid #333;
+    margin-top: 20px;
+}
+
+.footer-logo {
+    width: 30px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Media queries para móvil */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        background-color: #1F1F1F;
+        position: absolute;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        transition: left 0.3s ease;
+    }
+
+    .nav-links li {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links.show {
+        left: 0;
+    }
+
+    .calendar-container {
+        padding: 10px;
+    }
+}
